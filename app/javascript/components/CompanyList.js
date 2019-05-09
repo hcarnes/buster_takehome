@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const CompanyList = ({ companies }) => {
   return (
@@ -7,9 +8,10 @@ const CompanyList = ({ companies }) => {
       <ul>
         {companies.map(c => (
           <li key={c.id}>
-            <div>name: {c.name} </div>
-            <div>latitude: {c.latitude}</div>
-            <div>longitude: {c.longitude}</div>
+            <Link to={`/companies/${c.id}`}>
+              <div>name: {c.name} </div> - latitude: {c.latitude} - longitude:{" "}
+              {c.longitude}
+            </Link>
           </li>
         ))}
       </ul>
