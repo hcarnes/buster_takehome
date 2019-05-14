@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
-import Header from "./Header";
+import { Route } from "react-router";
 import CompanyList from "./CompanyList";
+import CompanyDetail from "./CompanyDetail";
 import axios from "axios";
 
 const CompanyEditor = props => {
   const [companies, setCompanies] = useState([]);
 
   const fetchCompanies = async () => {
-    const reponse = await axios(`http://localhost:3000/api/companies`);
+    const response = await axios(`http://localhost:3000/api/companies`);
 
-    setCompanies(reponse.data);
-    console.log(reponse.data);
+    setCompanies(response.data);
+    console.log(response.data);
   };
 
   useEffect(() => {
@@ -19,8 +20,11 @@ const CompanyEditor = props => {
 
   return (
     <>
-      <Header />
       <CompanyList companies={companies} />
+      <Route
+        path="/companies/:id?"
+        children={({ match }) => <CompanyDetail company={companies.find((c) => c.id.toString() === match.params.id)} />}
+      />
     </>
   );
 };
