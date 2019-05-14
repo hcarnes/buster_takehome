@@ -9,8 +9,7 @@ const CompanyList = ({ companies }) => {
         {companies.map(c => (
           <li key={c.id}>
             <Link to={`/companies/${c.id}`}>
-              <div>name: {c.name} </div> - latitude: {c.latitude} - longitude:{" "}
-              {c.longitude}
+              <span>{c.name} </span>
             </Link>
           </li>
         ))}
