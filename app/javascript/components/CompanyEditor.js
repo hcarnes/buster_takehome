@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Route } from "react-router";
 import CompanyList from "./CompanyList";
 import CompanyDetail from "./CompanyDetail";
+import CompanyForm from "./CompanyForm";
 import axios from "axios";
+import { Switch } from "react-router-dom";
 
 const CompanyEditor = props => {
   const [companies, setCompanies] = useState([]);
@@ -19,21 +21,24 @@ const CompanyEditor = props => {
 
   return (
     <>
-      <Route
-        path="/companies/:id?"
-        children={({ match }) => (
-          <CompanyDetail
-            company={
-              companies.find(c => c.id.toString() === match.params.id) || {
-                id: "",
-                name: "",
-                latitude: "",
-                longitude: ""
+      <Switch>
+        <Route exact path="/companies/new" component={CompanyForm}/>
+        <Route
+          exact path="/companies/:id?"
+          children={({ match }) => (
+            <CompanyDetail
+              company={
+                companies.find(c => c.id.toString() === match.params.id) || {
+                  id: "",
+                  name: "",
+                  latitude: "",
+                  longitude: ""
+                }
               }
-            }
-          />
-        )}
-      />
+            />
+          )}
+        />
+      </Switch>
       <CompanyList companies={companies} />
     </>
   );
