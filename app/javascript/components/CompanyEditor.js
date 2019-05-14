@@ -19,7 +19,6 @@ const CompanyEditor = props => {
 
   return (
     <>
-      <CompanyList companies={companies} />
       <Route
         path="/companies/:id?"
         children={({ match }) => (
@@ -35,6 +34,7 @@ const CompanyEditor = props => {
           />
         )}
       />
+      <CompanyList companies={companies} />
     </>
   );
 };
