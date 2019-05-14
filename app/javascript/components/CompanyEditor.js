@@ -11,7 +11,6 @@ const CompanyEditor = props => {
     const response = await axios(`http://localhost:3000/api/companies`);
 
     setCompanies(response.data);
-    console.log(response.data);
   };
 
   useEffect(() => {
@@ -23,7 +22,18 @@ const CompanyEditor = props => {
       <CompanyList companies={companies} />
       <Route
         path="/companies/:id?"
-        children={({ match }) => <CompanyDetail company={companies.find((c) => c.id.toString() === match.params.id)} />}
+        children={({ match }) => (
+          <CompanyDetail
+            company={
+              companies.find(c => c.id.toString() === match.params.id) || {
+                id: "",
+                name: "",
+                latitude: "",
+                longitude: ""
+              }
+            }
+          />
+        )}
       />
     </>
   );
