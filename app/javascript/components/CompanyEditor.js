@@ -4,7 +4,7 @@ import CompanyList from "./CompanyList";
 import CompanyDetail from "./CompanyDetail";
 import CompanyForm from "./CompanyForm";
 import axios from "axios";
-import { Switch } from "react-router-dom";
+import { Switch, Redirect } from "react-router-dom";
 
 const CompanyEditor = props => {
   const [companies, setCompanies] = useState([]);
@@ -43,6 +43,15 @@ const CompanyEditor = props => {
     }
   };
 
+  const deleteCompany = async ({ id }) => {
+    await axios.delete(`http://localhost:3000/api/companies/${id}`);
+
+    const deleted = true;
+    const deletedCompany = {...companies.find(c => c.id === id), deleted};
+    const newCompanies = [...companies.filter(c => c.id !== id), deletedCompany];
+    setCompanies(newCompanies);
+  };
+
   return (
     <>
       <Switch>
@@ -59,7 +68,14 @@ const CompanyEditor = props => {
               c => c.id.toString() === match.params.id
             );
 
-            return company ? <CompanyDetail company={company} /> : <></>;
+            return company ? (
+              <CompanyDetail
+                company={company}
+                deleteCompany={deleteCompany.bind(null, company)}
+              />
+            ) : (
+              <></>
+            );
           }}
         />
         <Route
