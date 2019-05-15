@@ -1,24 +1,29 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 
-const CompanyForm = (props) => {
-  const initialFormState = { id: null, name: "", latitude: "", longitude: "" };
-  const [company, setCompany] = useState(initialFormState);
+const CompanyForm = ({company, persistCompany}) => {
+  const initialFormState = company ? company : { id: null, name: "", latitude: "", longitude: "" };
+  const [formCompany, setFormCompany] = useState(initialFormState);
+  const [persisted, setPersisted] = useState(null);
+
+  if (persisted) {
+    return <Redirect to={`/companies/${persisted.id}`} />;
+  }
 
   const handleSubmit = async e => {
     e.preventDefault();
-    await props.addCompany(company);
-    setCompany(initialFormState)
+    await persistCompany(formCompany, setPersisted);
   };
 
   const handleInputChange = event => {
     const { name, value } = event.target;
 
-    setCompany({ ...company, [name]: value });
+    setFormCompany({ ...formCompany, [name]: value });
   };
 
   return (
     <>
-      <h2>New Company</h2>
+      <h2>{company ? "Edit" : "New"} Company</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="company_name">
@@ -27,7 +32,7 @@ const CompanyForm = (props) => {
               type="text"
               id="name"
               name="name"
-              value={company.name}
+              value={formCompany.name}
               onChange={handleInputChange}
               required
             />
@@ -40,7 +45,7 @@ const CompanyForm = (props) => {
               type="text"
               id="latitude"
               name="latitude"
-              value={company.latitude}
+              value={formCompany.latitude}
               onChange={handleInputChange}
               required
             />
@@ -53,14 +58,14 @@ const CompanyForm = (props) => {
               type="text"
               id="longitude"
               name="longitude"
-              value={company.longitude}
+              value={formCompany.longitude}
               onChange={handleInputChange}
               required
             />
           </label>
         </div>
         <div>
-          <button type="submit">Create company</button>
+          <button type="submit">{company ? "Edit" : "New"} company</button>
         </div>
       </form>
     </>

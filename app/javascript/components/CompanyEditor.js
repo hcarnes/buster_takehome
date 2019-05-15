@@ -19,13 +19,28 @@ const CompanyEditor = props => {
     fetchCompanies();
   }, []);
 
-  const addCompany = async newCompany => {
-    const response = await axios.post(
-      `http://localhost:3000/api/companies`,
-      newCompany
-    );
-
-    setCompanies([...companies, response.data]);
+  const persistCompany = async (company, callbackFn) => {
+    let response;
+    if (company.id) {
+      response = await axios.put(
+        `http://localhost:3000/api/companies/${company.id}`,
+        company
+      );
+      const newCompanies = [
+        ...companies.filter(c => c.id !== company.id),
+        company
+      ];
+      setCompanies(newCompanies);
+    } else {
+      response = await axios.post(
+        `http://localhost:3000/api/companies`,
+        company
+      );
+      setCompanies([...companies, response.data]);
+    }
+    if (typeof callbackFn == "function") {
+      callbackFn(response.data);
+    }
   };
 
   return (
@@ -34,15 +49,32 @@ const CompanyEditor = props => {
         <Route
           exact
           path="/companies/new"
-          children={() => <CompanyForm addCompany={addCompany} />}
+          children={() => <CompanyForm persistCompany={persistCompany} />}
         />
         <Route
           exact
-          path="/companies/:id?"
+          path="/companies/:id"
           children={({ match }) => {
-            const company = companies.find( c => c.id.toString() === match.params.id);
+            const company = companies.find(
+              c => c.id.toString() === match.params.id
+            );
 
-            return (company ? <CompanyDetail company={company} /> : <></>)
+            return company ? <CompanyDetail company={company} /> : <></>;
+          }}
+        />
+        <Route
+          exact
+          path="/companies/:id/edit"
+          children={({ match }) => {
+            const company = companies.find(
+              c => c.id.toString() === match.params.id
+            );
+
+            return company ? (
+              <CompanyForm company={company} persistCompany={persistCompany} />
+            ) : (
+              <></>
+            );
           }}
         />
       </Switch>

@@ -16,9 +16,9 @@ class Api::CompaniesController < ApplicationController
   end
 
   def update
-    company = Company.find(params['id'])
-    company.update(company_params)
-    respond_with Company, json: company
+    company = Company.find(params[:id])
+    company.update!(company_params)
+    render json: company
   end
 
   private
