@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import styles from "../styles/CompanyInfo";
 
 const CompanyDetail = ({company, deleteCompany}) => {
   const handleDelete =  (e) => {
@@ -8,18 +9,20 @@ const CompanyDetail = ({company, deleteCompany}) => {
   }
   
   if (company.deleted) {
-    return (<span>Company {company.name} has been deleted.</span>)
+    return (<span className={styles.CompanyInfo}>Company {company.name} has been deleted.</span>)
   } else {
     return (
-      <>
+      <div className={styles.CompanyInfo}>
         <ul>
           <li>Company name: {company.name}</li>
           <li>Latitude: {company.latitude}</li>
           <li>Longitude: {company.longitude}</li>
         </ul>
         <Link to={`/companies/${company.id}/edit`}>Edit</Link>
-        <a href="#" onClick={handleDelete}>Delete</a>
-      </>
+        <a href="#" onClick={handleDelete}>
+          Delete
+        </a>
+      </div>
     );
   }
 };

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
+import styles from "../styles/CompanyMap";
 
 const CompanyMap = ({ companies }) => {
   const [latitude, setLatitude] = useState(39.0997);
@@ -25,7 +26,7 @@ const CompanyMap = ({ companies }) => {
   }
 
   return (
-    <>
+    <div className={styles.CompanyMap}>
       <input
         type="number"
         placeholder="Zoom"
@@ -64,7 +65,7 @@ const CompanyMap = ({ companies }) => {
           );
         })}
       </Map>
-    </>
+    </div>
   );
 };
 

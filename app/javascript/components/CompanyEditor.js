@@ -6,6 +6,7 @@ import CompanyForm from "./CompanyForm";
 import CompanyMap from "./CompanyMap";
 import axios from "axios";
 import { Switch, Redirect } from "react-router-dom";
+import styles from "../styles/CompanyEditor";
 
 const CompanyEditor = props => {
   const [companies, setCompanies] = useState([]);

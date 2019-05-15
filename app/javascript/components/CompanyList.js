@@ -1,12 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import styles from "../styles/CompanyList";
 
 const CompanyList = ({ companies }) => {
   return (
-    <>
-      <h2>
-        Companies
-      </h2>
+    <div className={styles.CompanyList}>
+      <h2>Companies</h2>
       <span>
         <Link to="/companies/new">Create new company.</Link>
       </span>
@@ -19,7 +18,7 @@ const CompanyList = ({ companies }) => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 

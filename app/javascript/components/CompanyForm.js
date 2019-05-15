@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
+import styles from "../styles/CompanyInfo";
 
 const CompanyForm = ({company, persistCompany}) => {
   const initialFormState = company ? company : { id: null, name: "", latitude: "", longitude: "" };
@@ -22,7 +23,7 @@ const CompanyForm = ({company, persistCompany}) => {
   };
 
   return (
-    <>
+    <div className={styles.CompanyInfo}>
       <h2>{company ? "Edit" : "New"} Company</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -68,7 +69,7 @@ const CompanyForm = ({company, persistCompany}) => {
           <button type="submit">{company ? "Edit" : "New"} company</button>
         </div>
       </form>
-    </>
+    </div>
   );
 };
 
