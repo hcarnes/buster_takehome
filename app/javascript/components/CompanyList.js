@@ -7,7 +7,12 @@ const CompanyList = ({ companies }) => {
     <div className={styles.CompanyList}>
       <h2>Companies</h2>
       <span>
-        <Link to="/companies/new">Create new company.</Link>
+        <Link to="/companies/new">
+          <span role="img" aria-label="plus symbol">
+            ➕
+          </span>
+          Create new company.
+        </Link>
       </span>
       <ul>
         {companies.map(c => (

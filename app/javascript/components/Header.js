@@ -3,7 +3,7 @@ import styles from "../styles/Header";
 
 const Header = () => (
   <header className={styles.Header}>
-    <h1>Company Manager</h1>
+    <h1>Company Manager <span role="img" aria-label="office building">🏢</span></h1>
   </header>
 );
 

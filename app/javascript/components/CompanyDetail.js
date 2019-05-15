@@ -18,10 +18,24 @@ const CompanyDetail = ({company, deleteCompany}) => {
           <li>Latitude: {company.latitude}</li>
           <li>Longitude: {company.longitude}</li>
         </ul>
-        <Link to={`/companies/${company.id}/edit`}>Edit</Link>
-        <a href="#" onClick={handleDelete}>
-          Delete
-        </a>
+        <ul>
+          <li>
+            <Link to={`/companies/${company.id}/edit`}>
+              <span role="img" aria-label="pencil">
+                ✏️
+              </span>
+              Edit
+            </Link>
+          </li>
+          <li>
+            <a href="#" onClick={handleDelete}>
+              <span role="img" aria-label="wastebasket">
+                🗑️
+              </span>
+              Delete
+            </a>
+          </li>
+        </ul>
       </div>
     );
   }
