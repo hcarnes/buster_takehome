@@ -6,7 +6,7 @@ class CompaniesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should list companies as json" do
-   get companies_url, as: :json
+   get api_companies_url, as: :json
    assert_response :success
    
    @companies.each do |company|
