@@ -1,7 +1,7 @@
 import React from "react";
 import CompanyEditor from "./CompanyEditor";
 import Header from "./Header";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const App = () => (
   <Router>

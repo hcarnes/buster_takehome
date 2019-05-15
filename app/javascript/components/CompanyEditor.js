@@ -3,6 +3,7 @@ import { Route } from "react-router";
 import CompanyList from "./CompanyList";
 import CompanyDetail from "./CompanyDetail";
 import CompanyForm from "./CompanyForm";
+import CompanyMap from "./CompanyMap";
 import axios from "axios";
 import { Switch, Redirect } from "react-router-dom";
 
@@ -53,7 +54,7 @@ const CompanyEditor = props => {
   };
 
   return (
-    <>
+    <div className={styles.CompanyEditor}>
       <Switch>
         <Route
           exact
@@ -87,15 +88,19 @@ const CompanyEditor = props => {
             );
 
             return company ? (
-              <CompanyForm company={company} persistCompany={persistCompany} />
+              <CompanyForm
+                company={company}
+                persistCompany={persistCompany}
+              />
             ) : (
               <></>
             );
           }}
         />
       </Switch>
+      <CompanyMap companies={companies} />
       <CompanyList companies={companies} />
-    </>
+    </div>
   );
 };
 
