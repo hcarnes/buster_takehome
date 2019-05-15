@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
-const CompanyForm = ({ companies }) => {
-  
-  const handleSubmit = (e) => {
+const CompanyForm = (props) => {
+  const initialFormState = { id: null, name: "", latitude: "", longitude: "" };
+  const [company, setCompany] = useState(initialFormState);
+
+  const handleSubmit = async e => {
     e.preventDefault();
-    console.log('submitted');
-  }
+    await props.addCompany(company);
+    setCompany(initialFormState)
+  };
+
+  const handleInputChange = event => {
+    const { name, value } = event.target;
+
+    setCompany({ ...company, [name]: value });
+  };
 
   return (
     <>
@@ -14,19 +23,40 @@ const CompanyForm = ({ companies }) => {
         <div>
           <label htmlFor="company_name">
             <strong>Name:</strong>
-            <input type="text" id="company_name" name="company_name" />
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={company.name}
+              onChange={handleInputChange}
+              required
+            />
           </label>
         </div>
         <div>
           <label htmlFor="company_latitude">
             <strong>Latitude:</strong>
-            <input type="text" id="company_latitude" name="company_latitude" />
+            <input
+              type="text"
+              id="latitude"
+              name="latitude"
+              value={company.latitude}
+              onChange={handleInputChange}
+              required
+            />
           </label>
         </div>
         <div>
           <label htmlFor="company_longitude">
             <strong>Longitude:</strong>
-            <input type="text" id="company_longitude" name="company_longitude" />
+            <input
+              type="text"
+              id="longitude"
+              name="longitude"
+              value={company.longitude}
+              onChange={handleInputChange}
+              required
+            />
           </label>
         </div>
         <div>
@@ -34,6 +64,7 @@ const CompanyForm = ({ companies }) => {
         </div>
       </form>
     </>
-    );}
+  );
+};
 
 export default CompanyForm;

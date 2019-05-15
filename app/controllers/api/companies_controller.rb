@@ -8,7 +8,7 @@ class Api::CompaniesController < ApplicationController
   end
 
   def create
-    render json: Company.create(company_params)
+    render json: Company.create!(company_params)
   end
 
   def destroy

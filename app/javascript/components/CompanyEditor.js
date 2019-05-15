@@ -19,24 +19,31 @@ const CompanyEditor = props => {
     fetchCompanies();
   }, []);
 
+  const addCompany = async newCompany => {
+    const response = await axios.post(
+      `http://localhost:3000/api/companies`,
+      newCompany
+    );
+
+    setCompanies([...companies, response.data]);
+  };
+
   return (
     <>
       <Switch>
-        <Route exact path="/companies/new" component={CompanyForm}/>
         <Route
-          exact path="/companies/:id?"
-          children={({ match }) => (
-            <CompanyDetail
-              company={
-                companies.find(c => c.id.toString() === match.params.id) || {
-                  id: "",
-                  name: "",
-                  latitude: "",
-                  longitude: ""
-                }
-              }
-            />
-          )}
+          exact
+          path="/companies/new"
+          children={() => <CompanyForm addCompany={addCompany} />}
+        />
+        <Route
+          exact
+          path="/companies/:id?"
+          children={({ match }) => {
+            const company = companies.find( c => c.id.toString() === match.params.id);
+
+            return (company ? <CompanyDetail company={company} /> : <></>)
+          }}
         />
       </Switch>
       <CompanyList companies={companies} />
