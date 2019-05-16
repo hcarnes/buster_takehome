@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import styles from "../styles/CompanyMap";
 
@@ -7,38 +7,41 @@ const CompanyMap = ({ companies }) => {
   const [longitude, setLongitude] = useState(-94.5786);
   const [zoom, setZoom] = useState(4);
 
-  const handleChangeZoom = (e) => {
+  const handleChangeZoom = e => {
     const intZoom = parseInt(e.target.value, 10);
     if (intZoom > 0) {
       setZoom(intZoom);
     } else {
       console.debug("Invalid zoom: ", e.target.value);
     }
-  }
+  };
 
   const handleChangePosition = (setter, e) => {
     const floatPosition = parseFloat(e.target.value, 10);
     if (isNaN(floatPosition)) {
-      console.debug("Invalid position: ", e.target.value)
+      console.debug("Invalid position: ", e.target.value);
     } else {
-      setter(floatPosition)
+      setter(floatPosition);
     }
-  }
+  };
 
   return (
     <div className={styles.CompanyMap}>
+      Zoom:
       <input
         type="number"
         placeholder="Zoom"
         value={zoom}
         onChange={handleChangeZoom}
       />
+      Latitude:{" "}
       <input
         type="number"
         placeholder="Latitude"
         value={latitude}
         onChange={handleChangePosition.bind(null, setLatitude)}
       />
+      Longitude:{" "}
       <input
         type="number"
         placeholder="Longitude"
@@ -48,7 +51,7 @@ const CompanyMap = ({ companies }) => {
       <Map
         center={[latitude, longitude]}
         zoom={zoom}
-        style={{ height: "400px", width: "600px" }}
+        style={{ height: "400px", width: "774.5px" }}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
