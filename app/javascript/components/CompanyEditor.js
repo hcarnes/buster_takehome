@@ -12,7 +12,7 @@ const CompanyEditor = props => {
   const [companies, setCompanies] = useState([]);
 
   const fetchCompanies = async () => {
-    const response = await axios(`http://localhost:3000/api/companies`);
+    const response = await axios(`/api/companies`);
 
     setCompanies(response.data);
   };
@@ -25,7 +25,7 @@ const CompanyEditor = props => {
     let response;
     if (company.id) {
       response = await axios.put(
-        `http://localhost:3000/api/companies/${company.id}`,
+        `/api/companies/${company.id}`,
         company
       );
       const newCompanies = [
@@ -35,7 +35,7 @@ const CompanyEditor = props => {
       setCompanies(newCompanies);
     } else {
       response = await axios.post(
-        `http://localhost:3000/api/companies`,
+        `/api/companies`,
         company
       );
       setCompanies([...companies, response.data]);
@@ -46,7 +46,7 @@ const CompanyEditor = props => {
   };
 
   const deleteCompany = async ({ id }) => {
-    await axios.delete(`http://localhost:3000/api/companies/${id}`);
+    await axios.delete(`/api/companies/${id}`);
 
     const deleted = true;
     const deletedCompany = {...companies.find(c => c.id === id), deleted};
