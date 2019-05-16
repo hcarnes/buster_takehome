@@ -10,6 +10,14 @@ A coding assignment for Buster.
 
 I created this app using Rails and the webpacker gem to integrate React. I decided to use React in order to create a more interactive UX, and I believed the requirements translated easily into React components. It was a tradeoff for time because this was my first time implementing React/Webpacker in a personal project. While I enjoyed the challenge, I realize it would have been faster to do the CRUD requirements using only Rails and drop the map in using React/Webpacker.
 
+I didn't have time to implement the radius feature, but if I did I would approach it this way:
+
+1. Allow user to enter radius in meters
+2. Calculate distance between entered location and each company location using the [Haversine algorithm](https://github.com/njj/haversine).
+3. Filter out companies that are outside of the entered radius
+
+I've also implemented something similar in a personal project, Filth Finder. The code can be viewed [here](https://github.com/hcarnes/filth_finder). The app itself is deployed [here](https://filth-finder.codehannah.nyc/).
+
 If given more time, I would:
 
 1. Make the list of companies scrollable so that they don't extend so far down the page
