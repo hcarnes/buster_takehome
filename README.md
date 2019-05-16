@@ -4,9 +4,9 @@
 
 A coding assignment for Buster.
 
-**The app is deployed here: (https://buster-takehome.herokuapp.com/companies)[https://buster-takehome.herokuapp.com/companies].**
+**The app is deployed [here](https://buster-takehome.herokuapp.com/companies).**
 
-## Describe your solution and reasoning behind your choices. Include any trade-offs and what you might do differently given more time.
+**Describe your solution and reasoning behind your choices. Include any trade-offs and what you might do differently given more time.**
 
 I created this app using Rails and the webpacker gem to integrate React. I decided to use React in order to create a more interactive UX, and I believed the requirements translated easily into React components. It was a tradeoff for time because this was my first time implementing React/Webpacker in a personal project. While I enjoyed the challenge, I realize it would have been faster to do the CRUD requirements using only Rails and drop the map in using React/Webpacker.
 
@@ -27,6 +27,6 @@ Clone the repository.
 bundle install
 rake db:create
 rake db:migrate
-rake db:seet
+rake db:seed
 rails s
 ```
